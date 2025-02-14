@@ -21,7 +21,8 @@ class MainActivity : ComponentActivity() {
             Student_Schedule_AppTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
 
-                    var modifier = Modifier.padding(innerPadding)
+                    // Call MainScreen -> Display GUI on Phone
+                    MainScreen(modifier = Modifier.padding(innerPadding))
 
 
                 }
