@@ -23,31 +23,35 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 
 
-
+// DisplayHeading Function
 @Composable
-fun DisplayHeading(Heading: String){
+fun DisplayHeading(Heading: String){    // Start Function
     // Text with parameter + gui
     Text(Heading, color =(MaterialTheme.colorScheme.primary), fontWeight =
         FontWeight.Bold, style = MaterialTheme.typography.headlineMedium  )
-}
+}   // End Function
 
 
+// DisplayNormalText Function
 @Composable
-fun DisplayNormalText(Text1: String){
+fun DisplayNormalText(Text1: String){   // Start Function
     // Text with parameter + gui
     Text(Text1, color = Color.Magenta, style = MaterialTheme.typography.bodyLarge )
-}
+}   // End Function
 
 
+// DisplayStudentName_Credit Function
 @Composable
-fun DisplayStudentName_Credit(student: Student){
+fun DisplayStudentName_Credit(student: Student){    // Start Function
     // student parameter + gui
     Surface(modifier = Modifier.padding(20.dp), shape = RoundedCornerShape(10),
             shadowElevation = 30.dp)
-    {
-        Column {
+    {       // Start Surface
+        Column {    // Start Column
+            // variable that stores the total credits of the student
             var student_credits = student.TotalCredits()
 
+            // Calling multiple Functions into this "Bubble" - Top
             DisplayHeading(" Student Name & Credits !  ")
             DisplayNormalText("   Asim Razzaq")
             DisplayNormalText("   Credits in progress: $student_credits ")
@@ -58,29 +62,31 @@ fun DisplayStudentName_Credit(student: Student){
 }   // End Function
 
 
-
-
+// DisplayCourseInfo Function
 @Composable
-fun DisplayCourseInfo(courseInfo: CourseInfo){
-    // courseInfo parameter + gui
-
+fun DisplayCourseInfo(courseInfo: CourseInfo){  // Start Function
     //local var
     var name = courseInfo.CourseName
     var crDays = courseInfo.days
     var crStart = courseInfo.StartTime
     var crEnd = courseInfo.EndTime
 
+    // calling Functions for normal texts
     DisplayNormalText("$name  $crDays  $crStart  $crEnd")
-}
+
+}   // End Function
 
 
+// DisplayStudent_Schedule Function
 @Composable
-fun DisplayStudent_Schedule(student: Student){
+fun DisplayStudent_Schedule(student: Student){  // Start Function
     // student parameter + gui
     Surface(modifier = Modifier.padding(20.dp), shape = RoundedCornerShape(10),
         shadowElevation = 30.dp)
-    {
-        Column {
+    {   // Start Surface
+        Column {    // Start Column
+
+            // Calling Functions into this "Bubble" - Mid
 
             // Display heading
             DisplayHeading(" Student Schedule                ")
@@ -98,47 +104,39 @@ fun DisplayStudent_Schedule(student: Student){
 }   // End Function
 
 
+// DisplayButtons Function
 @Composable
-fun DisplayButtons(student: Student){
+fun DisplayButtons(student: Student){   // Start Function
     // student parameter + gui
     Surface(modifier = Modifier.padding(20.dp), shape = RoundedCornerShape(10),
         shadowElevation = 30.dp, )
-    {
-        Row(modifier = Modifier.padding(20.dp)) {
-//            Column {
+    {   // Surface start
+        Row(modifier = Modifier.padding(20.dp)) {      // Row Start
 
-
-
+                //local Var
             val context = LocalContext.current
 
+                // Creating Buttons for this "Bubble" - Bottom
+
+                // First Button - for Total Credits taking
             Button( onClick = {
                 Toast.makeText(context, "Total Credits : ${student.TotalCredits()} !", Toast.LENGTH_SHORT).show()
             })
             {
-                Text("Total Credits ")
+                Text("Total Credits")
             }
 
             // var for Optimal Study Hours > 2 hr per class well use 3 for this ex
             var studyHours = student.TotalCredits() * 3
 
+                // Second Button - for Optimal Study Hour
             Button( onClick = {
                 Toast.makeText(context, "Optimal Study Hours are : ${studyHours} !", Toast.LENGTH_SHORT).show()
             })
             {
-                Text("Optimal Study Hours ")
+                Text("Optimal Study Hours")
             }
 
-
-
-
-
-
-
-
-
-
-
-//            }   // End Column
         }   // End Row
     }   // End Surface
 }   // End Function
@@ -147,11 +145,10 @@ fun DisplayButtons(student: Student){
 
 
 
-
-
+// Main Screen Function
 @Composable
-fun MainScreen(modifier: Modifier){
-    Column(modifier) {
+fun MainScreen(modifier: Modifier){     // Start Function
+    Column(modifier) {      // Start Column
 
 //        // create Classes val for CourseInfo (MY ACTUAL CLASSES THIS SEMESTER)
         val class1 = CourseInfo("  CSC 329","09:25 am", "10:40 am", "MW", 3 )
@@ -161,31 +158,19 @@ fun MainScreen(modifier: Modifier){
         val class5 = CourseInfo("  CSC 325","  12:15 pm", "01:30 pm", "TR", 3 )
         val class6 = CourseInfo("  CSC 466","    4:30 pm", "  5:45 pm", "T  ", 3 )
 
-        // create student -> Which is me and input the classes
+        // create student -> Which is me and input the Courses for my Scheduled Semester !
         val Asim = Student(
             "Asim Razzaq", "Computer Science", listOf(class1, class2, class3, class4,class5 ,class6)
         )
 
-        // call Function for Top portion
+        // call Function - for Top portion of App
         DisplayStudentName_Credit(Asim)
 
-        // call Function for Bottom Portion of App
+        // call Function - for Mid Portion of App
         DisplayStudent_Schedule(Asim)
 
+        // Call function for Buttons - Bottom Portion of App
         DisplayButtons(Asim)
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
     } // End of Column
