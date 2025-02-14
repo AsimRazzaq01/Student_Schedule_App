@@ -154,9 +154,9 @@ fun MainScreen(modifier: Modifier){     // Start Function
         val class1 = CourseInfo("  CSC 329","09:25 am", "10:40 am", "MW", 3 )
         val class2 = CourseInfo("  BCS 371","10:50 am", "12:05 pm", "MW", 3 )
         val class3 = CourseInfo("  CSC 311","12:15 pm", "01:30 pm", "MW", 3 )
-        val class4 = CourseInfo("  CSC 499","   2:00 pm", "03:00 pm", "W  ", 3 )
-        val class5 = CourseInfo("  CSC 325","  12:15 pm", "01:30 pm", "TR", 3 )
-        val class6 = CourseInfo("  CSC 466","    4:30 pm", "  5:45 pm", "T  ", 3 )
+        val class4 = CourseInfo("  CSC 499","  02:00 pm", "03:00 pm", "W  ", 3 )
+        val class5 = CourseInfo("  CSC 325","  12:15 pm", " 01:30 pm", "TR", 3 )
+        val class6 = CourseInfo("  CSC 466","   04:30 pm", "05:45 pm", "T  ", 3 )
 
         // create student -> Which is me and input the Courses for my Scheduled Semester !
         val Asim = Student(
