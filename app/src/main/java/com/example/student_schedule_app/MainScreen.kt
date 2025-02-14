@@ -1,8 +1,11 @@
 package com.example.student_schedule_app
 
+import android.widget.Toast
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -12,11 +15,13 @@ import androidx.compose.runtime.SideEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
+
 
 
 @Composable
@@ -43,9 +48,9 @@ fun DisplayStudentName_Credit(student: Student){
         Column {
             var student_credits = student.TotalCredits()
 
-            DisplayHeading("Student Name & Credits !")
-            DisplayNormalText("Asim Razzaq")
-            DisplayNormalText("my Credits: $student_credits")
+            DisplayHeading(" Student Name & Credits !  ")
+            DisplayNormalText("   Asim Razzaq")
+            DisplayNormalText("   Credits in progress: $student_credits ")
 
 
         }   // End Column
@@ -78,7 +83,7 @@ fun DisplayStudent_Schedule(student: Student){
         Column {
 
             // Display heading
-            DisplayHeading("Student Schedule")
+            DisplayHeading(" Student Schedule                ")
 
             // Loop to display the class info
             var stCourses = student.courses.size
@@ -88,17 +93,55 @@ fun DisplayStudent_Schedule(student: Student){
                 i++
             }
 
-
-
-
-
-
         }   // End Column
     }   // End Surface
 }   // End Function
 
 
+@Composable
+fun DisplayButtons(student: Student){
+    // student parameter + gui
+    Surface(modifier = Modifier.padding(20.dp), shape = RoundedCornerShape(10),
+        shadowElevation = 30.dp, )
+    {
+        Row(modifier = Modifier.padding(20.dp)) {
+//            Column {
 
+
+
+            val context = LocalContext.current
+
+            Button( onClick = {
+                Toast.makeText(context, "Total Credits : ${student.TotalCredits()} !", Toast.LENGTH_SHORT).show()
+            })
+            {
+                Text("Total Credits ")
+            }
+
+            // var for Optimal Study Hours > 2 hr per class well use 3 for this ex
+            var studyHours = student.TotalCredits() * 3
+
+            Button( onClick = {
+                Toast.makeText(context, "Optimal Study Hours are : ${studyHours} !", Toast.LENGTH_SHORT).show()
+            })
+            {
+                Text("Optimal Study Hours ")
+            }
+
+
+
+
+
+
+
+
+
+
+
+//            }   // End Column
+        }   // End Row
+    }   // End Surface
+}   // End Function
 
 
 
@@ -111,12 +154,12 @@ fun MainScreen(modifier: Modifier){
     Column(modifier) {
 
 //        // create Classes val for CourseInfo (MY ACTUAL CLASSES THIS SEMESTER)
-        val class1 = CourseInfo("CSC 329","9:25 am", "10:40 am", "MW", 3 )
-        val class2 = CourseInfo("BCS 371","10:50 am", "12:05 pm", "MW", 3 )
-        val class3 = CourseInfo("CSC 311","12:15 pm", "1:30 pm", "MW", 3 )
-        val class4 = CourseInfo("CSC 499","2:00 pm", "3:00 pm", "W", 3 )
-        val class5 = CourseInfo("BCS 325","12:15 pm", "1:30 pm", "TR", 3 )
-        val class6 = CourseInfo("CSC 466","4:30 pm", "5:45 pm", "T", 3 )
+        val class1 = CourseInfo("  CSC 329","09:25 am", "10:40 am", "MW", 3 )
+        val class2 = CourseInfo("  BCS 371","10:50 am", "12:05 pm", "MW", 3 )
+        val class3 = CourseInfo("  CSC 311","12:15 pm", "01:30 pm", "MW", 3 )
+        val class4 = CourseInfo("  CSC 499","   2:00 pm", "03:00 pm", "W  ", 3 )
+        val class5 = CourseInfo("  CSC 325","  12:15 pm", "01:30 pm", "TR", 3 )
+        val class6 = CourseInfo("  CSC 466","    4:30 pm", "  5:45 pm", "T  ", 3 )
 
         // create student -> Which is me and input the classes
         val Asim = Student(
@@ -129,6 +172,7 @@ fun MainScreen(modifier: Modifier){
         // call Function for Bottom Portion of App
         DisplayStudent_Schedule(Asim)
 
+        DisplayButtons(Asim)
 
 
 
@@ -138,7 +182,8 @@ fun MainScreen(modifier: Modifier){
 
 
 
-    //Text("Student Schedule App !", fontSize = 30.sp)
+
+
 
 
 
